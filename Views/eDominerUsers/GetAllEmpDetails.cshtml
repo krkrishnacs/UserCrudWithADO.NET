@@ -1,0 +1,80 @@
+﻿@model IEnumerable<eDominerUser.Models.eDominerUserModel>
+
+@{
+    ViewBag.Title = "GetAllEmpDetails";
+}
+
+<h2>Get All EmpDetails</h2>
+@if (TempData["alertMessage"]!=null)
+{
+<div class="alert alert-info">
+   <strong>*Message*</strong> @TempData["alertMessage"]
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span>x</span>
+    </button>
+</div>
+}
+
+
+<p>
+    @Html.ActionLink("Add New User Recod", "UserAdd",null, new {@class="btn btn-primary"})
+</p>
+<table class="table table-bordered  table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StateName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hobbies)
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobileNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hobbies)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditEmpDetails", new { id = item.Id }, new { @class = "btn btn-primary" })|  @*&&*@
+            @Html.ActionLink("Delete", "Deleted", new { id = item.Id }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>
