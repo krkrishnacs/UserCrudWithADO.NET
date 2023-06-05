@@ -170,30 +170,40 @@ namespace eDominerUser.Repository
 
         }
 
-        public bool GetState(int StateId)
+        public List<State> GetState(int StateId)
         {
-
             connection();
+            List<State>states = new List<State>();
             SqlCommand com = new SqlCommand("GetStateById", con);
-
-            com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@StateId", StateId);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
             con.Open();
-            int i = com.ExecuteNonQuery();
+            da.Fill(dt);
             con.Close();
-            if (i >= 1)
+            foreach (DataRow dr in dt.Rows)
             {
+                states.Add(
 
-                return true;
-
+                    new State
+                    {
+                        StateId = Convert.ToInt32(dr["StateId"]),
+                        StateName = Convert.ToString(dr["StateName"])
+                      
+                    }
+                    );
             }
-            else
-            {
 
-                return false;
-            }
+            return states;
+        }
+
+
+
+
+
+    }
 
 
         }
-    }
-}
+  

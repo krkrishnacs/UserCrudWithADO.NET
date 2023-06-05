@@ -37,7 +37,7 @@ namespace eDominerUser.Controllers
                         ViewBag.Message = "User Added successfully";
                         ModelState.Clear();
                     }
-                return View();
+                    return View();
                 }
                 return RedirectToAction(nameof(GetAllEmpDetails));
             }
@@ -50,16 +50,33 @@ namespace eDominerUser.Controllers
         }
 
 
-        
+
         [HttpGet]
         public ActionResult GetAllEmpDetails()
         {
             ModelState.Clear();
             var list = dominerUserRepo.GetAllRecod();
-            if (list.Count==0)
+            if (list.Count == 0)
             {
                 TempData["alertMessage"] = "Currently Data Table has  not Avaiable Data";
             }
+            //else
+            //{
+            //    if (string.IsNullOrEmpty(Searchvalue))
+            //    {
+            //        ViewBag["ms"] = "This User is Not Avilable In the DataBase!";
+            //        return View(list);
+            //    }
+            //    //else
+            //    //{
+            //    //    if (Searchvalue.ToLower() == "Searchvalue")
+
+            //    //    {
+            //    //        var search = list.Where(p => p.Name.ToLower().Contains(Searchvalue.ToLower()));
+            //    //        return View(search);
+            //    //    }
+            //    //}
+            //}
             return View(list);
         }
 
@@ -79,7 +96,7 @@ namespace eDominerUser.Controllers
         }
 
 
-        [HttpPost,ActionName("EditEmpDetails")]
+        [HttpPost, ActionName("EditEmpDetails")]
         public ActionResult EditEmpDetails(eDominerUserModel dominerUserModel)
         {
             try
@@ -116,28 +133,19 @@ namespace eDominerUser.Controllers
         }
 
 
-        //[HttpGet]
-        //public ActionResult State(int StateId)
-        //{
-        //    try
-        //    {
-        //        eDominerUserRepo eDominerUserRepo = new eDominerUserRepo();
-        //        if (eDominerUserRepo.GetUserById(StateId))
-        //        {
-        //            ViewBag.AlertMsg = "Employee details deleted successfully";
 
-        //        }
-        //        return RedirectToAction("GetAllEmpDetails");
+        [HttpGet]
+        public ActionResult StateList(int StateId)
+        {
+            eDominerUserRepo eDominerUser = new eDominerUserRepo();
+            var uselist = eDominerUser.GetState(StateId).FirstOrDefault();
+            if (uselist == null)
+            {
+                return RedirectToAction("GetAllEmpDetails");
+            }
+            return View(uselist);
 
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-
-
+        }
 
 
     }

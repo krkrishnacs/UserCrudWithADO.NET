@@ -5,7 +5,7 @@
 }
 
 
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/css/multi-select-tag.css">
 
 @using (Html.BeginForm()) 
 {
@@ -73,7 +73,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.StateName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <select class="form-control" id="StateName" name="StateName" required>
+                    <select class="form-control" id="StateName" name="StateName">
                         <option>Select StateName</option>
                         <option value="Bihar" name="Bihar">Bihar</option>
                         <option value="WestBengal" name="WestBengal">WestBengal</option>
@@ -90,9 +90,8 @@
         <div class="col-md-8">
             <div class="form-group">
                 @Html.LabelFor(model => model.Hobbies, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-              <select class="form-control" id="Hobbies" name="Hobbies" required>
-                <option>Select Hobbies</option>
+              <div class="col-md-10">
+              <select class="form-control" id="Hobbies" name="Hobbies" multiple>
                 <option value="Criecket" name="Criecket">Criecket</option>
                 <option value="Luddu" name="Luddu">Luddu</option>
                 <option value="Chess" name="Chess">Chess</option>
@@ -100,7 +99,7 @@
                 <option value="IndoorGame" name="IndoorGame">IndoorGame</option>
                 <option value="Outerdoor" name="Outerdoor">Outerdoor</option>
             </select>
-                </div>
+            </div>
             </div>
         </div>
        
@@ -127,3 +126,11 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag/dist/js/multi-select-tag.js"></script>
+
+<script type="text/javascript">
+    new MultiSelectTag('Hobbies')  
+</script>
